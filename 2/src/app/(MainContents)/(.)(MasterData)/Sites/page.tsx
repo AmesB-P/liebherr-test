@@ -1,9 +1,9 @@
 "use client"
 import {TableComponent} from "@/components/Table";
-import {FC, useCallback, useEffect, useState} from "react";
-import axios from "axios";
+import React, {FC , useEffect, useState} from "react";
 import {tableHead} from "@/types/tableTypes";
 import {fetchDataSites} from "@/server_actions/fetchDataSites";
+import Header from "@/components/MainContentsLayout/Header";
 
 const Sites :FC =  () :JSX.Element => {
     const [sitesData , setSitesData] = useState([])
@@ -27,17 +27,6 @@ const Sites :FC =  () :JSX.Element => {
 
     ]
 
-    // const fetchData = async () =>{
-    //     try {
-    //         const {data} = await axios(`${process.env.NEXT_PUBLIC_API}/sites`)
-    //
-    //         if(!!data){
-    //             setSitesData(data)
-    //         }
-    //     }catch (e) {
-    //         // console.log('e' ,e)
-    //     }
-    // }
 
     useEffect(()=>{
         let isMounted = true;
@@ -56,6 +45,8 @@ const Sites :FC =  () :JSX.Element => {
 
     return(
         <>
+            <Header leftSide={"Title"} rightSide={null}
+            />
             <div className={"h-full w-full p-10"}>
                 <TableComponent theadData={thead} tbodyData={sitesData}/>
             </div>

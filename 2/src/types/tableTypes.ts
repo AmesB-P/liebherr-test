@@ -2,11 +2,14 @@
 export type tableHead = {
     key : string,
     name : string
+    align? : string,
+    children? : tHeadChildrenTypes[] | unknown[] | []
     // push(param: { name: string | number; key: string | number }): void;
 }
 
-type tableBody = {
-
+type tHeadChildrenTypes ={
+    key : string | number,
+    name : string
 }
 
 type customerTypes = {
@@ -30,7 +33,7 @@ type mixDesignsTypes = {
 }
 
 type mixDesignsComponentTypes = {
-    id : string,
+    id : string | number,
     materialId : number,
     value : number,
     unit : string
