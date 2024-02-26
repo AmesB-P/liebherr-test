@@ -36,12 +36,6 @@ const Customers = () => {
 
         fetchCustomersData().then(res => {
             if (isMounted) {
-                // const newData = res.map((e :any) => {
-                //     // delete e.id
-                //     return {
-                //         ...e
-                //     }
-                // })
                 setCustomerData(res);
             }
         });
@@ -56,14 +50,38 @@ const Customers = () => {
     const handleSubmit = useCallback(async (formCustomerData: any , method: string) => {
         try {
             const {data, status} = await axios({
-                method,
+                method ,
                 url: `${process.env.NEXT_PUBLIC_API}/customers`,
-                data: formCustomerData
+                data: [formCustomerData]
             })
 
             if (status === 201) {
                 setCustomerData((prevState) => {
-                    return [...prevState, data]
+                    return [...prevState, ...data]
+                })
+                setEditCustomerData("")
+            }else{
+                alert("Something went wrong!!")
+                setEditCustomerData("")
+            }
+        } catch (e) {
+            alert("Something went wrong!!")
+            setEditCustomerData("")
+            console.log("e" ,e)
+        }
+
+    }, [])
+    const handleDelete = useCallback(async (formCustomerData: any ) => {
+        try {
+            const {data, status} = await axios({
+                method : "DELETE",
+                url: `${process.env.NEXT_PUBLIC_API}/customers`,
+                data: [formCustomerData]
+            })
+
+            if (status === 201) {
+                setCustomerData((prevState) => {
+                    return [...prevState, ...data]
                 })
                 setEditCustomerData("")
             }else{
@@ -104,7 +122,7 @@ const Customers = () => {
           />
 
           <div className={"h-full w-full p-10 overflow-hidden"}>
-              <TableComponent theadData={thead} tbodyData={customerData} handleEditCustomer={handleEditCustomer} modeController={{mode,setMode}} isUseActions/>
+              <TableComponent handleDelete={handleDelete} theadData={thead} tbodyData={customerData} handleEditCustomer={handleEditCustomer} modeController={{mode,setMode}} isUseActions/>
           </div>
 
       </>

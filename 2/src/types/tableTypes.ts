@@ -47,6 +47,7 @@ export type tableComponentTypes = {
     theadData : tableHead[] | [],
     tbodyData : customerTypes[] | sitesTypes[] | mixDesignsTypes[]  |  [],
     handleChangePage? : Function,
+    handleDelete? : Function,
     isUseActions? : boolean,
     handleEditCustomer? : Function | undefined,
     modeController? : any | undefined,
