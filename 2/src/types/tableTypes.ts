@@ -7,16 +7,20 @@ export type tableHead = {
     // push(param: { name: string | number; key: string | number }): void;
 }
 
+export type tableBody = {
+    tbodyData :  customerTypes[] | sitesTypes[] | mixDesignsTypes[]  |  [],
+}
+
 type tHeadChildrenTypes ={
     key : string | number,
     name : string
 }
 
-type customerTypes = {
+export type customerTypes = {
     id : string,
     customerName : string
 }
-type sitesTypes = {
+export type sitesTypes = {
     id : string,
     customerId : string,
     siteName : string,
@@ -24,7 +28,7 @@ type sitesTypes = {
 }
 
 
-type mixDesignsTypes = {
+export type mixDesignsTypes = {
     id : string,
     mixDesignCode : string,
     mixDesignDescription : string,
@@ -32,7 +36,7 @@ type mixDesignsTypes = {
     components : mixDesignsComponentTypes[],
 }
 
-type mixDesignsComponentTypes = {
+export type mixDesignsComponentTypes = {
     id : string | number,
     materialId : number,
     value : number,
@@ -41,5 +45,12 @@ type mixDesignsComponentTypes = {
 
 export type tableComponentTypes = {
     theadData : tableHead[] | [],
-    tbodyData : customerTypes[] | sitesTypes[] | mixDesignsTypes[]  |  []
+    tbodyData : customerTypes[] | sitesTypes[] | mixDesignsTypes[]  |  [],
+    handleChangePage? : Function
+}
+
+export type pagetinationTypes ={
+    currentPage : number,
+    totalPages : number,
+    onPageChange? : Function
 }

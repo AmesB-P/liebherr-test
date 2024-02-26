@@ -12,7 +12,7 @@ const MixDesign = () => {
     const thead : tableHead[] = [
         {
             key : "id",
-            name : "No.",
+            name : "ID.",
             align : "center"
         },
         {
