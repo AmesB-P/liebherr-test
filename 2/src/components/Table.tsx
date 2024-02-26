@@ -5,7 +5,7 @@ import {isArray} from "lodash";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
 
 
-const TableComponent :FC<tableComponentTypes> = ({isUseNo = true,theadData, tbodyData ,isUseActions = false , handleEditCustomer}): JSX.Element => {
+const TableComponent :FC<tableComponentTypes> = ({isUseNo = true,theadData, tbodyData ,isUseActions = false , handleEditCustomer,handleDelete}): JSX.Element => {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [TBodyData, setTBodyData] = useState<tableComponentTypes["tbodyData"] | []>([])
@@ -105,7 +105,7 @@ const TableComponent :FC<tableComponentTypes> = ({isUseNo = true,theadData, tbod
                                                         <button onClick={()=>handleEditCustomer(items)} className={"bg-yellow-400 text-white rounded-lg"}>
                                                             edit
                                                         </button>
-                                                        <button className={"bg-red-700 text-white rounded-lg"}>
+                                                        <button onClick={()=>handleDelete(items)} className={"bg-red-700 text-white rounded-lg"}>
                                                             delete
                                                         </button>
                                                     </div>
