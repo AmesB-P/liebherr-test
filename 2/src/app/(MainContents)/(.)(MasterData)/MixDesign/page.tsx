@@ -20,7 +20,7 @@ const MixDesign = () => {
             name : "Mix design code"
         },
         {
-            key : "mixDesignDescription:",
+            key : "mixDesignDescription",
             name : "Mix design description"
         },
         {
@@ -53,6 +53,13 @@ const MixDesign = () => {
 
         fetchDataMixDesign().then(res => {
             if (isMounted) {
+                // const newData = res.map((e :any )=>{
+                //     delete e.id
+                //     return{
+                //         ...e
+                //     }
+                // })
+                console.log("res" ,res)
                 setMixDesignData(res);
             }
         });
@@ -94,7 +101,7 @@ const MixDesign = () => {
             }
             />
             <div className={"h-full w-full p-10"}>
-                <TableComponent theadData={thead} tbodyData={mixDesignData}/>
+                <TableComponent isUseNo={false} theadData={thead} tbodyData={mixDesignData}/>
             </div>
 
         </>

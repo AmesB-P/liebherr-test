@@ -1,7 +1,27 @@
-import {JSX} from "react";
+"use client"
+import { options } from "./api/auth/[...nextauth]/options"
+import { getServerSession } from "next-auth/next"
+import {useRouter} from "next/navigation";
+import {login} from "@/server_actions/login";
+import {useState} from "react";
+import {cookies} from "next/headers";
 
+export default function Home()  {
+  // const session = await getServerSession(options)
+  // console.log("session" , session)
+  const router = useRouter()
+  const [username , setUserName] = useState("")
+  const [password , setPassword] = useState("")
+  const submitLogin = async (event: any)=>{
+    event.preventDefault()
+    const user = await login({username , password})
 
-export default function Home() : JSX.Element {
+    if(user){
+      router.push('/Orders')
+    }else{
+      alert("wrong username or password!!")
+    }
+  }
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -20,16 +40,17 @@ export default function Home() : JSX.Element {
           <form className="space-y-6" action="#" method="POST">
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
+                Username
               </label>
               <div className="mt-2">
                 <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
+                    id="username"
+                    name="username"
+                    type="text"
+                    // autoComplete="email"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={(e)=>setUserName(e.target.value)} value={username}
                 />
               </div>
             </div>
@@ -53,6 +74,7 @@ export default function Home() : JSX.Element {
                     autoComplete="current-password"
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    onChange={(e)=>setPassword(e.target.value)} value={password}
                 />
               </div>
             </div>
@@ -61,6 +83,7 @@ export default function Home() : JSX.Element {
               <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={submitLogin}
               >
                 Sign in
               </button>

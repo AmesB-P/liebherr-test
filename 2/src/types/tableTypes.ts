@@ -46,7 +46,11 @@ export type mixDesignsComponentTypes = {
 export type tableComponentTypes = {
     theadData : tableHead[] | [],
     tbodyData : customerTypes[] | sitesTypes[] | mixDesignsTypes[]  |  [],
-    handleChangePage? : Function
+    handleChangePage? : Function,
+    isUseActions? : boolean,
+    handleEditCustomer? : Function | undefined,
+    modeController? : any | undefined,
+    isUseNo? : boolean
 }
 
 export type pagetinationTypes ={

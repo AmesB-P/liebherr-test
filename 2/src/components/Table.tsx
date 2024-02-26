@@ -5,7 +5,8 @@ import {isArray} from "lodash";
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/20/solid";
 
 
-const TableComponent :FC<tableComponentTypes> = ({theadData, tbodyData}): JSX.Element => {
+const TableComponent :FC<tableComponentTypes> = ({isUseNo = true,theadData, tbodyData ,isUseActions = false , handleEditCustomer}): JSX.Element => {
+
     const [currentPage, setCurrentPage] = useState(1)
     const [TBodyData, setTBodyData] = useState<tableComponentTypes["tbodyData"] | []>([])
 
@@ -71,9 +72,10 @@ const TableComponent :FC<tableComponentTypes> = ({theadData, tbodyData}): JSX.El
                 {
                     TBodyData ? (
                         TBodyData.map((items, index) => {
-                                return (
+                                // @ts-ignore
+                            return (
                                     <tr key={`${index}-${items.id}`}>
-                                        <td key={index}>{index + 1}</td>
+                                        {isUseNo ? <td key={index}>{index + 1}</td> : null}
                                         {
                                             Object.keys(items).map((key: string, _idx: number) =>
                                                 isArray((items as any)[key]) ? (
@@ -90,12 +92,27 @@ const TableComponent :FC<tableComponentTypes> = ({theadData, tbodyData}): JSX.El
                                                         }
                                                     </td>
                                                 ) : (
-                                                    <td key={`${index}-${key}`} className="border px-4 py-2">
-                                                        {(items as any)?.[key] ?? "-"}
-                                                    </td>
+                                                        <td key={`${index}-${key}`} className="border px-4 py-2">
+                                                            {(items as any)?.[key] ?? "-"}
+                                                        </td>
                                                 )
                                             )
                                         }
+                                        {
+                                            isUseActions ? (
+                                                <td key={`actions- ${index}`} className="border px-4 py-2">
+                                                    <div className={"grid sm:grid-cols-2 grid-cols-1 justify-center text-center gap-2"}>
+                                                        <button onClick={()=>handleEditCustomer(items)} className={"bg-yellow-400 text-white rounded-lg"}>
+                                                            edit
+                                                        </button>
+                                                        <button className={"bg-red-700 text-white rounded-lg"}>
+                                                            delete
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            ) : null
+                                        }
+
                                     </tr>
                                 )
                             }

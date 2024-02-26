@@ -9,8 +9,12 @@ const Sites :FC =  () :JSX.Element => {
     const [sitesData , setSitesData] = useState([])
     const thead : tableHead[] = [
         {
-            key : "id",
+            key : "no",
             name : "No."
+        },
+        {
+            key : "SiteId",
+            name : "Site id"
         },
         {
             key : "customerId",
@@ -45,7 +49,7 @@ const Sites :FC =  () :JSX.Element => {
 
     return(
         <>
-            <Header leftSide={"Title"} rightSide={null}
+            <Header leftSide={"Sites"} rightSide={null}
             />
             <div className={"h-full w-full p-10"}>
                 <TableComponent theadData={thead} tbodyData={sitesData}/>

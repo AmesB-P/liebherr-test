@@ -9,14 +9,6 @@ import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/20/solid'
 import axios from "axios";
 
 const Orders = () => {
-    type orderDataTypes = {
-        customerId: string
-        id?: number
-        mixDesignId: string
-        qty: string
-        remark: string
-        sitesId: string
-    }
     const [ordersData, setOrdersData] = useState<any[] | []>([])
 
     const thead: tableHead[] = [
